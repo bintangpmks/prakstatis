@@ -1,0 +1,115 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "39FfzX1YIxX9"
+      },
+      "outputs": [],
+      "source": [
+        "from google.colab import files\n",
+        "import pandas as pd\n",
+        "uploaded=files.upload()\n",
+        "#memanggil dan menampilkan dataset\n",
+        "data_bintang = pd.read_csv('/content/titanic.csv.csv')\n",
+        "print(data_bintang)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "data1 = data_bintang.loc[:,['Age','Pclass','Survived']]\n",
+        "print(data1)"
+      ],
+      "metadata": {
+        "id": "IFTvN7BJI67d"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "data2 = data_bintang[['Age', 'Pclass', 'Survived']]\n",
+        "data2.plot(title='Persebaran Data', x='Age', y='Pclass', kind='scatter', c='Survived',\n",
+        "colormap='Paired')"
+      ],
+      "metadata": {
+        "id": "hKRrVgxyI7te"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "data3 = data_bintang[['Name', 'Sex', 'Age', 'Pclass', 'Fare']]\n",
+        "penumpang=data3.groupby('Pclass')['Name'].nunique()\n",
+        "print('Jumlah Penumpang:\\n', penumpang)"
+      ],
+      "metadata": {
+        "id": "q7pqyAFCI7xV"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "data4 = data_bintang[['Name', 'Sex', 'Age', 'Pclass', 'Fare']]\n",
+        "notsurvivedpassanger=data4['Pclass'].loc[data_bintang['Survived']==0]\n",
+        "print('Penumpang yang tidak survived:\\n', notsurvivedpassanger.value_counts())\n",
+        "survivedpassanger=data4['Pclass'].loc[data_bintang['Survived']==1]\n",
+        "print('\\nPenumpang yang survived:\\n', survivedpassanger.value_counts())"
+      ],
+      "metadata": {
+        "id": "-Iyytu1MI73-"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "data_tugas = data_bintang[['Name', 'Sex', 'Age', 'Pclass', 'Fare']]\n",
+        "kelamin=data_tugas.groupby('Sex')['Name'].nunique()\n",
+        "print('Jumlah kelamin:\\n', kelamin) "
+      ],
+      "metadata": {
+        "id": "NrjehUfrJBiN"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "bintang = data_bintang[['Name', 'Sex', 'Age', 'Pclass', 'Fare']]\n",
+        "notsurvivedpassanger=bintang['Sex'].loc[data_bintang['Survived']==0]\n",
+        "print('Penumpang Mati:\\n', notsurvivedpassanger.value_counts())\n",
+        "survivedpassanger=bintang['Sex'].loc[data_bintang['Survived']==1]\n",
+        "print('\\nPenumpang gajadi mati:\\n', survivedpassanger.value_counts())"
+      ],
+      "metadata": {
+        "id": "CyrbDBWOJBq1"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
